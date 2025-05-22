@@ -17,8 +17,10 @@
 
     #wheel-container {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: 90vmin;
+      height: 90vmin;
+      max-width: 500px;
+      max-height: 500px;
     }
 
     #wheel {
@@ -30,12 +32,18 @@
       top: 0;
       left: 0;
       background: conic-gradient(
-        #f06292 0deg 60deg,
-        #ba68c8 60deg 120deg,
-        #64b5f6 120deg 180deg,
-        #4db6ac 180deg 240deg,
-        #ffd54f 240deg 300deg,
-        #ff8a65 300deg 360deg
+        #f06292 0deg 30deg,
+        #ba68c8 30deg 60deg,
+        #64b5f6 60deg 90deg,
+        #4db6ac 90deg 120deg,
+        #ffd54f 120deg 150deg,
+        #ff8a65 150deg 180deg,
+        #a1887f 180deg 210deg,
+        #81c784 210deg 240deg,
+        #9575cd 240deg 270deg,
+        #4fc3f7 270deg 300deg,
+        #ffb74d 300deg 330deg,
+        #e57373 330deg 360deg
       );
       transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
     }
@@ -47,7 +55,7 @@
       border-right: 20px solid transparent;
       border-bottom: 30px solid #d32f2f;
       position: absolute;
-      top: -40px;
+      top: -30px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
@@ -55,7 +63,7 @@
 
     #spin-button {
       position: absolute;
-      bottom: -70px;
+      bottom: -60px;
       left: 50%;
       transform: translateX(-50%);
       padding: 10px 20px;
@@ -83,6 +91,23 @@
   <script>
     const wheel = document.getElementById("wheel");
     const spinButton = document.getElementById("spin-button");
+    const numberOfSlices = 12;
+    const sliceAngle = 360 / numberOfSlices;
+    const sliceNames = [
+      "Free Coffee",
+      "Bonus Points",
+      "Discount Code",
+      "Mystery Box",
+      "Try Again",
+      "Lucky Charm",
+      "Surprise Gift",
+      "Free Shipping",
+      "VIP Access",
+      "Golden Ticket",
+      "Smile Badge",
+      "Spin Again"
+    ];
+
     let deg = 0;
 
     spinButton.addEventListener("click", () => {
@@ -94,6 +119,10 @@
       wheel.style.transform = `rotate(${deg}deg)`;
 
       setTimeout(() => {
+        const actualDeg = deg % 360;
+        const sliceIndex = Math.floor(((360 - actualDeg) % 360) / sliceAngle);
+        const result = sliceNames[sliceIndex];
+        alert(`🎉 You won: ${result}!`);
         spinButton.disabled = false;
       }, 5200);
     });

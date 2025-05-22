@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin the Wheel</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: radial-gradient(circle at center, #fff 0%, #f8f8f8 100%);
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    #wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 10px solid #f06292;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: conic-gradient(
+        #f06292 0deg 60deg,
+        #ba68c8 60deg 120deg,
+        #64b5f6 120deg 180deg,
+        #4db6ac 180deg 240deg,
+        #ffd54f 240deg 300deg,
+        #ff8a65 300deg 360deg
+      );
+      transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    #pointer {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid #d32f2f;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    #spin-button {
+      position: absolute;
+      bottom: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: #f06292;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    #spin-button:hover {
+      background-color: #ec407a;
+    }
+  </style>
+</head>
+<body>
+  <div id="wheel-container">
+    <div id="pointer"></div>
+    <div id="wheel"></div>
+    <button id="spin-button">SPIN</button>
+  </div>
+
+  <script>
+    const wheel = document.getElementById("wheel");
+    const spinButton = document.getElementById("spin-button");
+    let deg = 0;
+
+    spinButton.addEventListener("click", () => {
+      spinButton.disabled = true;
+      const min = 2000;
+      const max = 5000;
+      const rotation = Math.floor(Math.random() * (max - min)) + min;
+      deg += rotation;
+      wheel.style.transform = `rotate(${deg}deg)`;
+
+      setTimeout(() => {
+        spinButton.disabled = false;
+      }, 5200);
+    });
+  </script>
+</body>
+</html>

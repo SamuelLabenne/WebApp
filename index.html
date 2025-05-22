@@ -2,18 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Love Wheel">
+  <link rel="apple-touch-icon" href="icon.png">
   <title>Spin the Wheel</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #fff 0%, #f8f8f8 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: radial-gradient(circle at center, #fff 0%, #f8f8f8 100%);
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     #wheel-container {
@@ -22,7 +29,7 @@
       height: 90vmin;
       max-width: 500px;
       max-height: 500px;
-      margin-bottom: 80px;
+      margin-bottom: 60px;
     }
 
     #wheel {
@@ -34,18 +41,20 @@
       top: 0;
       left: 0;
       background: conic-gradient(
-        #f06292 0deg 30deg,
-        #ba68c8 30deg 60deg,
-        #64b5f6 60deg 90deg,
-        #4db6ac 90deg 120deg,
-        #ffd54f 120deg 150deg,
-        #ff8a65 150deg 180deg,
-        #a1887f 180deg 210deg,
-        #81c784 210deg 240deg,
-        #9575cd 240deg 270deg,
-        #4fc3f7 270deg 300deg,
-        #ffb74d 300deg 330deg,
-        #e57373 330deg 360deg
+        #f06292 0deg 25.7deg,
+        #ba68c8 25.7deg 51.4deg,
+        #64b5f6 51.4deg 77.1deg,
+        #4db6ac 77.1deg 102.8deg,
+        #ffd54f 102.8deg 128.5deg,
+        #ff8a65 128.5deg 154.2deg,
+        #a1887f 154.2deg 179.9deg,
+        #81c784 179.9deg 205.6deg,
+        #9575cd 205.6deg 231.3deg,
+        #4fc3f7 231.3deg 257deg,
+        #ffb74d 257deg 282.7deg,
+        #e57373 282.7deg 308.4deg,
+        #90caf9 308.4deg 334.1deg,
+        #ce93d8 334.1deg 360deg
       );
       transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
     }
@@ -143,21 +152,23 @@
   <script>
     const wheel = document.getElementById("wheel");
     const spinButton = document.getElementById("spin-button");
-    const numberOfSlices = 12;
+    const numberOfSlices = 14;
     const sliceAngle = 360 / numberOfSlices;
     const sliceNames = [
-      "Free Coffee",
-      "Bonus Points",
-      "Discount Code",
-      "Mystery Box",
-      "Try Again",
-      "Lucky Charm",
-      "Surprise Gift",
-      "Free Shipping",
-      "VIP Access",
-      "Golden Ticket",
-      "Smile Badge",
-      "Spin Again"
+      "A big hug 🤗",
+      "One passionate kiss 💋",
+      "You plan our next date ❤️",
+      "Movie night — your choice 🎬",
+      "Breakfast in bed 🥐☕",
+      "A surprise adventure 🚗",
+      "Candlelit dinner (I cook) 🍷🍝",
+      "A full body massage 💆‍♀️",
+      "Lazy cuddle session (Cash in within 5 days) 🛌",
+      "AMBER DAY! You choose everything for 24 hours ✨",
+      "Game night with snacks 🎲🍿",
+      "Dessert of your choice 🍰",
+      "I cook for you 🍳",
+      "One extra spin on the wheel 🔄"
     ];
 
     let deg = 0;

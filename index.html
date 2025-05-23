@@ -112,7 +112,7 @@
       margin-top: 15px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #007aff;
+      background-color: #f06292;
       color: white;
       border: none;
       border-radius: 10px;
@@ -120,7 +120,7 @@
     }
 
     .popup button:hover {
-      background-color: #005fcc;
+      background-color: #b200f8;
     }
 
     .overlay {
@@ -135,6 +135,8 @@
   </style>
 </head>
 <body>
+<audio id="spin-sound" src="spin.wav" preload="auto" loop></audio>
+<audio id="win-sound" src="win.wav" preload="auto"></audio>
   <div id="wheel-container">
     <div id="pointer"></div>
     <div id="wheel"></div>
@@ -145,7 +147,7 @@
   <div id="popup" class="popup" style="display:none;">
     <h2>🎉 You won:</h2>
     <p id="prize-text"></p>
-    <button onclick="closePopup()">OK</button>
+    <button onclick="closePopup()">Claim</button>
   </div>
 
   <script>
@@ -183,6 +185,9 @@
       document.getElementById("overlay").style.display = "none";
     }
 
+    const spinSound = document.getElementById("spin-sound");
+    const winSound = document.getElementById("win-sound");
+
     spinButton.addEventListener("click", () => {
       spinButton.disabled = true;
       const min = 2000;
@@ -191,10 +196,21 @@
       deg += rotation;
       wheel.style.transform = `rotate(${deg}deg)`;
 
+      spinSound.currentTime = 0;
+      spinSound.play();
+
       setTimeout(() => {
+        spinSound.pause();
+        spinSound.currentTime = 0;
+
         const actualDeg = deg % 360;
         const sliceIndex = Math.floor(((360 - actualDeg) % 360) / sliceAngle);
         const result = sliceNames[sliceIndex];
+        
+        winSound.currentTime = 0;
+        winSound.play();
+
+
         showPopup(result);
         spinButton.disabled = false;
       }, 5200);

@@ -188,33 +188,36 @@
     const spinSound = document.getElementById("spin-sound");
     const winSound = document.getElementById("win-sound");
 
-    spinButton.addEventListener("click", () => {
-      spinButton.disabled = true;
-      const min = 2000;
-      const max = 5000;
-      const rotation = Math.floor(Math.random() * (max - min)) + min;
-      deg += rotation;
-      wheel.style.transform = `rotate(${deg}deg)`;
+spinButton.addEventListener("click", () => {
+  // Required user interaction to make audio usable later
+  winSound.play().then(() => winSound.pause());
 
-      spinSound.currentTime = 0;
-      spinSound.play();
+  spinButton.disabled = true;
+  const min = 2000;
+  const max = 5000;
+  const rotation = Math.floor(Math.random() * (max - min)) + min;
+  deg += rotation;
+  wheel.style.transform = `rotate(${deg}deg)`;
 
-      setTimeout(() => {
-        spinSound.pause();
-        spinSound.currentTime = 0;
+  spinSound.currentTime = 0;
+  spinSound.play();
 
-        const actualDeg = deg % 360;
-        const sliceIndex = Math.floor(((360 - actualDeg) % 360) / sliceAngle);
-        const result = sliceNames[sliceIndex];
-        
-        winSound.currentTime = 0;
-        winSound.play();
+  setTimeout(() => {
+    spinSound.pause();
+    spinSound.currentTime = 0;
 
+    const actualDeg = deg % 360;
+    const sliceIndex = Math.floor(((360 - actualDeg) % 360) / sliceAngle);
+    const result = sliceNames[sliceIndex];
 
-        showPopup(result);
-        spinButton.disabled = false;
-      }, 5200);
-    });
+    // Now mobile allows this to play because audio context was primed
+    winSound.currentTime = 0;
+    winSound.play();
+
+    showPopup(result);
+    spinButton.disabled = false;
+  }, 5200);
+});
   </script>
 </body>
 </html>
